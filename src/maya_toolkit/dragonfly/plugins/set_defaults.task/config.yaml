@@ -1,0 +1,22 @@
+title: Set Controller Defaults
+version: 0.0.1
+description: Store control attribute values as the default pose of the rig
+color: (255, 100, 100)
+params:
+  controls:
+    paramType: nodeList
+    description: Nodes to store default values on
+    defaultValue: []
+  overrideAttributes:
+    paramType: compound
+    description: Explicitly set the default value of these attributes
+    defaultValue: []
+    children:
+    - name: attrName
+      paramType: string
+      description: Long or short attribute name
+      defaultValue: null
+    - name: attrValue
+      paramType: string
+      description: Value to represent default value
+      defaultValue: null

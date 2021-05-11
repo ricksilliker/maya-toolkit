@@ -1,0 +1,39 @@
+title: Scene Cleanup
+version: 0.0.1
+description: Runs various scene cleanup functions, use near end of build
+color: (255, 100, 100)
+params:
+  renderLayers:
+    paramType: bool
+    description: Deletes renderLayer nodes
+    defaultValue: true
+  deleteTurtle:
+    paramType: bool
+    description: Deletes turtle nodes
+    defaultValue: true
+  deleteAllNamespaces:
+    paramType: bool
+    description: Deletes All Namespaces
+    defaultValue: true
+  deleteUnknownNodes:
+    paramType: bool
+    description: Deletes Unknown nodes
+    defaultValue: true
+  deleteOrphanedReferanceNodes:
+    paramType: bool
+    description: Deletes orphaned reference nodes
+    defaultValue: true
+  deleteUnknownPlugins:
+    paramType: bool
+    description: Deletes renderLayer nodes
+    defaultValue: true
+  deleteUnusedShaders:
+    paramType: bool
+    description: Deletes unused shaders in scene
+    defaultValue: true
+  deleteLayers:
+    paramType: bool
+    description: Delete leftover layers
+    defaultValue: true
+
+

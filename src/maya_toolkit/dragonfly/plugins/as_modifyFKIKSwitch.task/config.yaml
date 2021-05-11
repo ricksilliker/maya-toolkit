@@ -1,0 +1,22 @@
+title: Advanced Skeleton - FKIK switch
+version: 0.0.3
+description: Adds FKIK switch info to controls
+color: (255, 100, 100)
+params:
+  fkikSwitches:
+    paramType: compound
+    description: FKIK nodes involved in switching
+    defaultValue: []
+    children:
+    - name: fkControls
+      paramType: string
+      description: FK controls
+      defaultValue: FKShoulder_L, FKElbow_L, FKWrist_L
+    - name: ikControls
+      paramType: string
+      description: IK and Pole Vector controls
+      defaultValue: IKArm_L, PoleArm_L
+    - name: fkikSwitch
+      paramType: string
+      description: Node with FKIK switch attribute
+      defaultValue: FKIKArm_L

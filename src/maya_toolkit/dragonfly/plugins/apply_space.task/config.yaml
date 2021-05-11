@@ -1,0 +1,18 @@
+title: Apply Spaces
+version: 0.0.2
+description: Add valid spaces to a target object given a list of space names
+color: (255, 100, 100)
+params:
+  spaces:
+    paramType: compound
+    description: Dictate the Target and which spaces to apply to that Target
+    defaultValue: []
+    children:
+    - name: target
+      paramType: node
+      description: A single node that will receive the list of spaces
+      defaultValue: null
+    - name: spaces
+      paramType: string
+      description: A list of space names separated by a comma
+      defaultValue: 'world, master'

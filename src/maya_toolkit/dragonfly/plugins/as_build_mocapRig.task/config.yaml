@@ -1,0 +1,21 @@
+title: Advanced Skeleton - Build Mocap Rig
+version: 0.0.1
+description: Adds a mocap offset rig to an existing Advanced Skeleton rig
+color: (255, 100, 100)
+params:
+  addMocapRig:
+      paramType: bool
+      description: Add mocap offset skeleton to drive animation rig with
+      defaultValue: True
+  extractMocapRigToFBX:
+      paramType: bool
+      description: Extracts mocap skeleton from rig and saves to fbx directory
+      defaultValue: True
+  fbxDirectory:
+      paramType: file_path
+      defaultValue: null
+      description: Directory to save FBX file to
+  mocapRigSkinWeightFilePath:
+      paramType: file_path
+      defaultValue: 'data/mocap_skin.json'
+      description: Location on disk for mocap geometry skin weights to import (optional)

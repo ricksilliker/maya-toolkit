@@ -1,0 +1,52 @@
+title: Rig Cleanup
+version: 0.0.1
+description: Runs various rig cleanup functions, use near end of build.
+color: (255, 100, 100)
+params:
+  cleanupTopNodes:
+      paramType: bool
+      description: Cleans up any dag nodes outside of rig hierarchy
+      defaultValue: true
+  cleanupProxyNodes:
+      paramType: bool
+      description: Cleans up any proxy nodes that exist in scene
+      defaultValue: true
+  curveArnoldAttrRemoval:
+      paramType: bool
+      description: Cleans up any arnold attrs created on shape nodes
+      defaultValue: true
+  parentConstraints:
+    paramType: bool
+    description: Parents constraints under noXform group
+    defaultValue: true
+  checkMaxVertSkinInfluences:
+    paramType: bool
+    description: Check max skin influences on rigged meshes
+    defaultValue: true
+  maxSkinInfluencesPerVert:
+    paramType: int
+    description: Max number of skin influences per vertex to check for
+    defaultValue: 8
+  skeletonVisibilityFix:
+    paramType: bool
+    description: Verify drawing override is turned off on COG joint
+    defaultValue: true
+  rigSkeletonVisibilityFix:
+    paramType: bool
+    description: Toggle drawStyle for joints under Rig group
+    defaultValue: true
+  lockHideCtlVisibility:
+    paramType: bool
+    description: Lock and Hide Visibility of Controls
+    defaultValue: false
+  createBindPose:
+    paramType: bool
+    description: Creates one bind pose node for rig skeleton
+    defaultValue: true
+
+
+
+
+
+
+

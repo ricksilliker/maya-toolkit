@@ -1,0 +1,83 @@
+/* Global CSS */
+
+* {
+    outline: none;
+    color: #DDD;
+    background: #555;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+/* General CSS */
+
+QLineEdit {
+    color: #DDD;
+    background: #444;
+}
+
+QPushButton {
+    background: transparent;
+    border: none;
+    font-family: FontAwesome, sans-serif;
+    font-size: 16pt;
+    color: #DDD;
+}
+
+QPushButton:hover {
+    color: white;
+    background-color: #666;
+}
+
+QPushButton:pressed {
+    background-color: #777;
+}
+
+QTreeView {
+    background: #333;
+    /*border: 1px solid #111;*/
+    /*border-bottom: None;*/
+    /*border-radius: 2px;*/
+    border: None;
+    /*alternate-background-color: #444;*/
+    icon-size: 50px;
+    font-size: 14pt;
+    color: #DDD;
+    font-family: "OpenSans-Regular", sans-serif;
+}
+
+QTreeView::item {
+    height: 30px;
+    background: #444;
+    padding: 5px;
+}
+
+QTreeView::item:!active {
+    border: None;
+}
+
+QTreeView::item:selected {
+    background: #666;
+    border: 2px solid dodgerblue;
+    /*border-left: None;*/
+}
+
+QTreeView::branch {
+    background: #333;
+}
+
+/*QTreeView::branch:selected {*/
+    /*background: transparent;*/
+/*}*/
+
+QTreeView::branch:has-children {
+    image: url('{img}/disabled_icon.png');
+}
+
+QTreeView::branch:has-children:closed {
+    image: url('{img}/enabled_icon.png');
+}
+
+/*QTreeView::branch:selected {*/
+    /*border: 2px solid dodgerblue;*/
+    /*border-right: None;*/
+/*}*/

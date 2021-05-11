@@ -1,0 +1,29 @@
+title: Bind Skin
+version: 0.0.1
+description: Skin geometry to joints
+color: (255, 100, 100)
+params:
+  geometry:
+    paramType: nodeList
+    description: Mesh or nurbs objects to skin
+    defaultValue: []
+
+  joints:
+    paramType: nodeList
+    description: Influence objects for the skin cluster, must be joints
+    defaultValue: []
+
+  weightsFile:
+    paramType: projectFile
+    description: Existing weights to apply after skin cluster initialization
+    defaultValue: null
+
+  maxInfluences:
+    paramType: int
+    description: Max number of influences per point
+    defaultValue: 4
+
+  maintainMaxInfluence:
+    paramType: bool
+    description: Apply interactive normalization if extra influences are added beyond the max influence count
+    defaultValue: true

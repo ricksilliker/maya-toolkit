@@ -1,0 +1,22 @@
+title: Create Category
+version: 0.0.1
+description: Create rig hierarchy groups, with the ability to add existing nodes
+color: (255, 100, 100)
+params:
+  categories:
+    paramType: compound
+    description: Rig core hierarchy groups
+    defaultValue: []
+    children:
+    - name: name
+      paramType: string
+      defaultValue: NewCategory
+      description: Name to give group node
+    - name: vis
+      paramType: bool
+      defaultValue: true
+      description: Create visibility switch attr on top node for this category
+    - name: nodes
+      paramType: nodeList
+      defaultValue: []
+      description: Nodes that exist to add to this category group under the rig

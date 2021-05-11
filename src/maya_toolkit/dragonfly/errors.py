@@ -1,0 +1,2 @@
+class DragonflyBuildError(Exception):
+    pass

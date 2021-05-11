@@ -1,0 +1,9 @@
+title: Make Bakeable
+version: 0.0.1
+description: Mark nodes as bakeable objects for the FBX Exporter
+color: (255, 100, 100)
+params:
+  nodes:
+    paramType: nodeList
+    description: Joints used to deform the character
+    defaultValue: []

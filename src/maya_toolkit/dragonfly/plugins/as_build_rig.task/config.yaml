@@ -1,0 +1,21 @@
+title: Advanced Skeleton - Build Rig
+version: 0.0.1
+description: Builds Advanced Skeleton animation rig from fit skeleton
+color: (255, 100, 100)
+params:
+  useVersionedFitFile:
+      paramType: bool
+      description: Imports fit skeleton from specified directory, otherwise uses fit skeleton in current scene
+      defaultValue: True
+  fitSkeletonDirectory:
+      paramType: file_path
+      defaultValue: null
+      description: Fit skeleton directory
+  rebuildRig:
+      paramType: bool
+      description: Runs full rig rebuild from fit skeleton (if off, just imports built rig)
+      defaultValue: True
+  addMocapOffsetSkeleton:
+      paramType: bool
+      description: Add mocap offset skeleton to drive animation rig with
+      defaultValue: False

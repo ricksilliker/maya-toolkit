@@ -1,0 +1,14 @@
+title: Advanced Skeleton - Modify Foot IK
+version: 0.0.3
+description: Converts AS foot IK control to use attrs instead of controls
+color: (255, 100, 100)
+params:
+  footIKControls:
+    paramType: compound
+    description: Specify foot IK controls to modify foot setup on
+    defaultValue: []
+    children:
+    - name: footIKControl
+      paramType: string
+      description: A single node that will receive the list of spaces
+      defaultValue: null

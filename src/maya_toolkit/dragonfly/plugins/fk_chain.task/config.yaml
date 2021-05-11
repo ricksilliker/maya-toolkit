@@ -1,0 +1,29 @@
+title: FK Chain
+version: 0.0.1
+description: Create N number FK system
+color: (255, 100, 100)
+params:
+  skeleton:
+    paramType: nodeList
+    description: Joints used to deform the character
+    defaultValue: []
+
+  controls:
+    paramType: nodeList
+    description: Control objects used to move the skeleton and/or rig
+    defaultValue: []
+
+  numberOfSegments:
+    paramType: int
+    description: Number of joints/controls to generate when `setUp` is run on a new FK Chain instance
+    defaultValue: 3
+
+  useConstraints:
+    paramType: bool
+    description: Connect control objects to deformation joints using constraints, if disabled a matrix nodal network is created
+    defaultValue: true
+
+  disableScaling:
+    paramType: bool
+    description: Lock and hide scale attributes on all control objects
+    defaultValue: false

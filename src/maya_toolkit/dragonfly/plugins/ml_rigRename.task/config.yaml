@@ -1,0 +1,17 @@
+title: Rig Rename
+version: 0.0.1
+description: Runs various rig cleanup functions, use near end of build.
+color: (255, 100, 100)
+params:
+  advancedSkeletonToMLRigRename:
+    paramType: bool
+    description: Renames Advanced Skeleton rig to ML naming convention
+    defaultValue: false
+
+
+
+
+
+
+
+

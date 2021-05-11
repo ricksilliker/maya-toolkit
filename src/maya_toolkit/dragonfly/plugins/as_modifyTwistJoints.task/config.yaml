@@ -1,0 +1,18 @@
+title: Advanced Skeleton - Modify Twist Joints
+version: 0.0.3
+description: Reparents child twist joints of parent joint to be "leaf" joints
+color: (255, 100, 100)
+params:
+  twistParentJoints:
+    paramType: compound
+    description: Specify parent of twist joints
+    defaultValue: []
+    children:
+    - name: twistParentJoint
+      paramType: string
+      description: Parent joint with twist joints below
+      defaultValue: null
+    - name: twistJoints
+      paramType: string
+      description: Twist joints under parent to reparent
+      defaultValue: null

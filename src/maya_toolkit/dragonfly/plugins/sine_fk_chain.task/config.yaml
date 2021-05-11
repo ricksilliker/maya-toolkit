@@ -1,0 +1,39 @@
+title: Sine chain
+version: 0.0.1
+description: FK chain with controllable procedural sine wave motion
+color: (255, 100, 100)
+params:
+  baseName:
+    paramType: string
+    description: Name description for this module
+    defaultValue: cn_spine
+
+  skeleton:
+    paramType: nodeList
+    description: Joints used to deform the character
+    defaultValue: []
+
+  controls:
+    paramType: nodeList
+    description: Control objects used to move the skeleton and/or rig
+    defaultValue: []
+
+  numberOfSegments:
+    paramType: int
+    description: Number of joints/controls to generate when `setUp` is run on a new FK Chain instance
+    defaultValue: 5
+
+  sineControl:
+    paramType: node
+    description: Control object where sine control attributes will be added
+    defaultValue: null
+
+  sineAxis:
+    paramType: string
+    description: Rotation axis to add sine expression to
+    defaultValue: x,y,z
+
+  disableScaling:
+    paramType: bool
+    description: Lock and hide scale attributes on all control objects
+    defaultValue: false

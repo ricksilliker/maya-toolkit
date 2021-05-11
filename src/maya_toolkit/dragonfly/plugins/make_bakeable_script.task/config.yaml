@@ -1,0 +1,134 @@
+# https://stackoverflow.com/questions/3790454/in-yaml-how-do-i-break-a-string-over-multiple-lines
+title: Make Bakeable Script
+version: 0.0.1
+description: Run input Custom Python code
+color: (255, 100, 100)
+params:
+  code:
+    paramType: python
+    description: Code to be executed
+    defaultValue: |
+                  #===================
+                  # DESCRIPTION
+                  #===================
+                  """Use to define FBX export data (meshes, skeleton etc.)"""
+
+                  #===================
+                  # USER INPUT
+                  #===================
+                  """ Define asset name, rig top node,  joints, meshes and or LOD node to export to FBX"""
+                  import maya.cmds as cmds
+
+                  asset_name = rig['asset']
+                  rig_top_node = '{}_rig'.format(asset_name)
+                  fbx_geo = cmds.listRelatives('LOD_0', children=True)
+                  fbx_joints = cmds.listRelatives('skeleton', ad=True, type='joint')
+
+
+                  #======================
+                  # MAKE BAKEABLE SCRIPT
+                  #======================
+                  """Scripted version of makeBakeables for FBX Exporting"""
+                  import dragonfly.modules
+                  import dragonfly.meta_types
+
+
+                  def add_makeBakeableAttrs(top_node, asset_name, bake_geo, bake_skeleton, deleteExisting=True):
+                      """Adds makeBakeable attrs to rig top node
+
+                      bake_geo = cmds.listRelatives('geo_lod0_grp', children=True)
+                      bake_skeleton = cmds.listRelatives('skel_grp', ad=True, type='joint')
+                      add_makeBakeableAttrs('CHR_ANW_DragonflyBlue', 'CHR_ANW_DragonflyBlue', bake_geo, bake_skeleton)
+                      """
+                      if not cmds.attributeQuery('rig_data', node=top_node, exists=True):
+                          print 'rig_data attr does not exist, adding'
+                          # Add asset attr
+                          dragonfly.modules.add_metatype(top_node, 'rig_info')
+
+                          # Add rig data to top node
+                          rig_data = {}
+                          rig_data['asset'] = asset_name
+                          pyToAttr('{}.rig_data'.format(top_node), rig_data)
+
+                      # Add top node rig attr
+                      if not cmds.attributeQuery(dragonfly.meta_types.MTYPE_RIG, node=top_node, exists=True):
+                          dragonfly.modules.add_metatype(top_node, dragonfly.meta_types.MTYPE_RIG)
+
+                      # DELETE BAKE ATTR IF SPECIFIED
+                      if deleteExisting:
+                          if cmds.attributeQuery('bakeNodes', node=top_node, exists=True):
+                              cmds.deleteAttr('{}.bakeNodes'.format(top_node))
+
+                      # MAKE BAKEABLE COMMAND
+                      cmds.addAttr(top_node, ln='bakeNodes', at='message', multi=True)
+
+                      # SKELETON NODES
+                      bake_nodes = bake_skeleton
+
+                      # GEOMETRY NODES
+                      if bake_geo:
+                          for geo in bake_geo:
+                              bake_nodes.append(geo)
+
+                      # ADD MAKE BAKEABLE ATTR
+                      if bake_nodes:
+                          index=0
+                          for node in bake_nodes:
+                              dragonfly.modules.add_metatype(node, dragonfly.meta_types.MTYPE_BAKEABLE)
+                              cmds.connectAttr('{}.message'.format(node), '{}.bakeNodes[{}]'.format(top_node, index))
+                              index=index+1
+
+                      print "Make Bakeable data added to {}".format(top_node)
+                      return True
+
+
+                  def pyToAttr(objAttr, data, lock=True):
+                      """Write Python data to the given Maya obj.attr.	This data can later be read back via attrToPy().
+
+                      Args:
+                          objAttr: A valid object.attribute name in the scene.
+                                      If the object exists, but the attribute doesn't, the attribute will be added.
+                                      If the attribute already exists, it must be of type 'string', so the Python data can be written to it.
+                          data:   Some Python data, data that will be added to the attribute in question.
+                          lock:   Lock the attribute to prevent accidental editing
+
+                      Examples:
+                          dictData = {'asset':'YellowButterfly'}# dictionary data
+                          pyToAttr('YellowButterfly_rig.rig_data', dictData)# stores dictData dictionary to "rig_data" attr
+                          attrToPy('YellowButterfly_rig.rig_data', 'asset')# retrieves dictionary's "asset" key from "rig_data" attr
+
+                          listData = [1,2,3,"this", "is"]
+                          pyToAttr('YellowButterfly_rig.list_data', listData)
+                          my_list = attrToPy('YellowButterfly_rig.list_data', None)
+                      """
+                      obj, attr = objAttr.split('.')
+                      if not cmds.objExists(objAttr):
+                          cmds.addAttr(obj, longName=attr, dataType='string')
+                      if cmds.getAttr(objAttr, type=True) != 'string':
+                          raise Exception("Object '%s' already has an attribute called '%s', but it isn't type 'string'"%(obj,attr))
+
+                      stringData = data
+                      cmds.setAttr(objAttr, stringData, type='string')
+                      if lock:
+                          cmds.setAttr(objAttr, lock=True)
+
+
+                  #======================
+                  # MAKE BAKEABLE RUN
+                  #======================
+
+                  add_makeBakeableAttrs(rig_top_node, asset_name, fbx_geo, fbx_joints)
+
+  inputs:
+    paramType: compound
+    defaultValue: []
+    description: Node references as variables
+    children:
+      - name: variable
+        paramType: string
+        defaultValue: null
+        description: Variable name to use in the code
+      - name: node
+        paramType: node
+        defaultValue: null
+        description: An existing node in the scene

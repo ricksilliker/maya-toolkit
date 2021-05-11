@@ -1,0 +1,29 @@
+title: Tag Control
+version: 0.0.1
+description: Mark nodes as animation controllers
+color: (255, 100, 100)
+params:
+  nodes:
+    paramType: nodeList
+    description: Objects to be controls for animation
+    defaultValue: []
+
+  createOffset:
+    paramType: bool
+    description: Create an offset group for each node
+    defaultValue: true
+
+  hiddenAttrs:
+    paramType: string
+    description: Names of attributes separated by a comma that will be hidden from the channelbox
+    defaultValue: rax, ray, raz, v
+
+  lockedAttrs:
+    paramType: string
+    description: Names of attributes separated by a comma that will be locked
+    defaultValue: rax, ray, raz, v
+
+  freezeScale:
+    paramType: bool
+    description: Clean up scale of the control object
+    defaultValue: false

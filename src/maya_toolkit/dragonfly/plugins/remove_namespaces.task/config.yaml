@@ -1,0 +1,9 @@
+title: Remove Namespaces
+version: 0.0.1
+description: Strip namespaces from the file, except those listed
+color: (255, 100, 100)
+params:
+  excludeList:
+    paramType: string
+    description: A list of namespace names separated by a comma
+    defaultValue: null

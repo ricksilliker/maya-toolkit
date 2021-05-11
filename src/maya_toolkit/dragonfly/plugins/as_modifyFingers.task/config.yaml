@@ -1,0 +1,18 @@
+title: Advanced Skeleton - Modify biped hand finger setup
+version: 0.0.3
+description: Modifications for biped hand
+color: (255, 100, 100)
+params:
+  fingerMods:
+    paramType: compound
+    description: Specify finger rig modifications to perform
+    defaultValue: []
+    children:
+    - name: fingerSpreadModification
+      paramType: bool
+      description: Add advanced finger spread control
+      defaultValue: true
+    - name: fingerSpreadCupControls
+      paramType: string
+      description: Finger cup controls to add spread control to
+      defaultValue: FKMiddleCup_L, FKRingCup_L, FKPinkyCup_L

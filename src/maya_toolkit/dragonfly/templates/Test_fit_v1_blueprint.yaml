@@ -1,0 +1,437 @@
+tasks:
+- name: DRAGONFLY ADVANCED SKELETON TEMPLATE
+  task: python
+  enabled: true
+  debug: false
+  group: null
+  mirror: false
+  code: import maya.cmds as cmds
+  inputs: []
+- name: Top Node
+  task: top_node
+  enabled: true
+  debug: false
+  group: PRE_BUILD
+  mirror: false
+  rigName: Test
+- name: import_references
+  task: import_references
+  enabled: true
+  debug: false
+  group: PRE_BUILD
+  mirror: false
+  excludeNodes:
+  - !dfNode 'None | DFA62D75-4309-94F1-6C02-098EB9D98772'
+- name: remove_namespaces
+  task: remove_namespaces
+  enabled: true
+  debug: false
+  group: PRE_BUILD
+  mirror: false
+  excludeList: ''
+- name: Add Rig Groups
+  task: create_category
+  enabled: true
+  debug: true
+  group: PRE_BUILD
+  mirror: false
+  categories:
+  - name: rig
+    nodes: []
+    vis: true
+  - name: skeleton
+    nodes: []
+    vis: true
+  - name: noXform
+    nodes: []
+    vis: true
+  - name: geo
+    nodes:
+    - !dfNode 'model:Test_lod0_mesh | 1CF0ED3C-4F9C-4786-17A5-F4A9C15C6589'
+    vis: true
+  - name: ctls
+    nodes: []
+    vis: true
+  - name: spaces
+    nodes: []
+    vis: true
+- name: Create LOD Group
+  task: create_lod_group
+  enabled: true
+  debug: false
+  group: PRE_BUILD
+  mirror: false
+  lods:
+  - geo:
+    - !dfNode 'model:Test_lod0_mesh | 1CF0ED3C-4F9C-4786-17A5-F4A9C15C6589'
+    lodName: LOD0
+- name: Master Body Cog
+  task: create_masterBodyCog
+  enabled: true
+  debug: false
+  group: RIG_BUILD
+  mirror: false
+  masterControl: !dfNode 'cn_master_ctl | 46AE77CC-424F-DDA6-879C-8D9A65EA36BC'
+  bodyControl: !dfNode 'cn_body_ctl | 0503667C-419B-9F56-D2B0-6E82BDF213C7'
+  cogControl: !dfNode 'cn_cog_ctl | 5DEB64BB-4A8E-4B6C-7B89-C8A2CA268E0D'
+  rootJoint: !dfNode 'cn_root_jnt | A6D3A756-4806-C3AF-6E3C-C090E52C36DB'
+  addTrajectoryControl: true
+- name: Advanced Skeleton - Build Rig
+  task: as_build_rig
+  enabled: true
+  debug: false
+  group: RIG_BUILD
+  mirror: false
+  useVersionedFitFile: false
+  fitSkeletonDirectory: ''
+  rebuildRig: true
+  addMocapOffsetSkeleton: false
+- name: Advanced Skeleton - Modify Rig
+  task: as_modify_rig
+  enabled: true
+  debug: false
+  group: RIG_BUILD
+  mirror: false
+  parentUnderMasterBodyCog: true
+  controlShapesColors: true
+  fkIkBlendRange: true
+  rotationOrdersXZY: true
+  addRootJoint: true
+  addWorldSpaceArmIK: false
+  addWorldOrientSpaceArmIK: true
+  addHeelSwingControl: true
+  addFkGimbalControls: true
+  fixFingerSpread: true
+  disableVolume: true
+- name: Rig Rename
+  task: ml_rigRename
+  enabled: true
+  debug: false
+  group: RIG_BUILD
+  mirror: false
+  advancedSkeletonToMLRigRename: true
+- name: Create Spaces Strings
+  task: create_space_strings
+  enabled: true
+  debug: false
+  group: RIG_BUILD
+  mirror: false
+  spaces:
+  - delegates: []
+    spaceName: master
+    target: cn_master_ctl
+  - delegates: []
+    spaceName: body
+    target: cn_body_ctl
+  - delegates: []
+    spaceName: rtArmIK
+    target: rt_extraArm_ik_ctl
+  - delegates: []
+    spaceName: lfArmIK
+    target: lf_extraArm_ik_ctl
+  - delegates: []
+    spaceName: lfLegIK
+    target: lf_extraLeg_ik_ctl
+  - delegates: []
+    spaceName: rtLegIK
+    target: rt_extraLeg_ik_ctl
+  - delegates: []
+    spaceName: chest
+    target: cn_chest_jnt
+  - delegates: []
+    spaceName: rtClavicle
+    target: rt_clavicle_jnt
+  - delegates: []
+    spaceName: lfClavicle
+    target: lf_clavicle_jnt
+  - delegates: []
+    spaceName: offset
+    target: cn_masterOffset_ctl
+  - delegates: &id001 []
+    spaceName: rtAnkle
+    target: rt_leg_ik_ctl
+  - delegates: *id001
+    spaceName: lfAnkle
+    target: lf_leg_ik_ctl
+  - delegates: &id002 []
+    spaceName: rtArmWorld
+    target: rt_armWorld_ik_ctl
+  - delegates: *id002
+    spaceName: lfArmWorld
+    target: lf_armWorld_ik_ctl
+- name: Apply Spaces Strings
+  task: apply_space_strings
+  enabled: true
+  debug: false
+  group: RIG_BUILD
+  mirror: false
+  spaces:
+  - spaces: world, master, offset, body, chest, lfClavicle
+    target: lf_poleArm_ctl
+  - spaces: world, master, offset, body, chest, rtClavicle
+    target: rt_poleArm_ctl
+  - spaces: world, master, offset, body, chest, lfClavicle, lfArmWorld
+    target: lf_arm_ik_ctl
+  - spaces: world, master, offset, body, chest, rtClavicle, rtArmWorld
+    target: rt_arm_ik_ctl
+  - spaces: world, master, offset, body, lfAnkle
+    target: lf_poleLeg_ctl
+  - spaces: world, master, offset, body, rtAnkle
+    target: rt_poleLeg_ctl
+  - spaces: world, master, offset, body
+    target: lf_leg_ik_ctl
+  - spaces: world, master, offset, body
+    target: rt_leg_ik_ctl
+  - spaces: world, master, offset, body, chest
+    target: cn_spline1_ik_ctl
+  - spaces: world, master, offset, body, chest
+    target: cn_spline3_ik_ctl
+- name: IKFK Matching Setup Python
+  task: python
+  enabled: true
+  debug: false
+  group: RIG_BUILD
+  mirror: false
+  code: "import maya.cmds as cmds\n\nikfk = cmds.duplicate('rt_arm_ik_ctlShape' ,\
+    \ n='rt_arm_fkikMatch_ctl')\narr = cmds.listRelatives('rt_arm_fkikMatch_ctl',\
+    \ ad=True, f=True)\narr = [str(r) for r in arr]\narr.pop(0)\nfor i in arr:\n \
+    \   cmds.delete(i)\ncmds.parent('rt_arm_fkikMatch_ctl','rt_hand_fk_ctl')\n\nikfk\
+    \ = cmds.duplicate('lf_arm_ik_ctlShape' , n='lf_arm_fkikMatch_ctl')\narr = cmds.listRelatives('lf_arm_fkikMatch_ctl',\
+    \ ad=True, f=True)\narr = [str(r) for r in arr]\narr.pop(0)\nfor i in arr:\n \
+    \   cmds.delete(i)\ncmds.parent('lf_arm_fkikMatch_ctl','lf_hand_fk_ctl')"
+  inputs: []
+- name: Control Curve Import
+  task: python
+  enabled: true
+  debug: false
+  group: DEFORMATION
+  mirror: false
+  code: "from data_io import curve_io as crv_io \ncrv_io.import_control_curves('data/control_curves.json')"
+  inputs: []
+- name: Import Skinclusters
+  task: python
+  enabled: true
+  debug: true
+  group: DEFORMATION
+  mirror: false
+  code: "from data_io import skinCluster_io as sc \nsc.importSkinWeight('data/Test_lod0_mesh_skin.json',\
+    \ ['Test_lod0_mesh'])"
+  inputs: []
+- name: Import Blendshapes
+  task: python
+  enabled: true
+  debug: false
+  group: DEFORMATION
+  mirror: false
+  code: import maya.cmds as cmds
+  inputs: []
+- name: Custom Post Build
+  task: python
+  enabled: true
+  debug: false
+  group: POST_BUILD
+  mirror: false
+  code: '# Custom commands here
+
+    import maya.cmds as cmds
+
+    '
+  inputs: []
+- name: Rig Cleanup
+  task: rig_cleanup
+  enabled: true
+  debug: true
+  group: POST_BUILD
+  mirror: false
+  cleanupTopNodes: true
+  cleanupProxyNodes: true
+  curveArnoldAttrRemoval: true
+  parentConstraints: true
+  checkMaxVertSkinInfluences: true
+  maxSkinInfluencesPerVert: 8
+  skeletonVisibilityFix: true
+  rigSkeletonVisibilityFix: true
+- name: Scene Cleanup
+  task: scene_cleanup
+  enabled: true
+  debug: false
+  group: POST_BUILD
+  mirror: false
+  renderLayers: true
+  deleteTurtle: true
+  deleteAllNamespaces: true
+  deleteUnknownNodes: true
+  deleteOrphanedReferanceNodes: true
+  deleteUnknownPlugins: true
+  deleteLayers: true
+- name: Set Defaults
+  task: python
+  enabled: true
+  debug: false
+  group: POST_BUILD
+  mirror: false
+  code: "import maya.cmds as cmds\n\ncmds.setAttr('rt_arm_ik_fk_ctl.FKIKBlend', 1)\n\
+    cmds.setAttr('lf_arm_ik_fk_ctl.FKIKBlend', 1)\ncmds.setAttr('rt_arm_ik_ctl.spaces',\
+    \ 1)\ncmds.setAttr('lf_arm_ik_ctl.spaces', 1)\ncmds.setAttr('rt_leg_ik_ctl.spaces',\
+    \ 2)\ncmds.setAttr('lf_leg_ik_ctl.spaces', 2)\ncmds.setAttr('cn_spline1_ik_ctl.spaces',\
+    \ 4)\ncmds.setAttr('lf_poleArm_ctl.spaces', 5)\ncmds.setAttr('rt_poleArm_ctl.spaces',\
+    \ 5)\ncmds.setAttr('lf_poleLeg_ctl.spaces', 4)\ncmds.setAttr('rt_poleLeg_ctl.spaces',\
+    \ 4)\ncmds.setAttr('Test_rig.geo', 2)\ncmds.setAttr('Test_rig.skeleton', 0)\n\
+    cmds.setAttr('Test_lod0_mesh.overrideEnabled', 0)\nrj = cmds.listRelatives('rig',\
+    \ ad=True, type='joint')\nfor a in rj:\n    cmds.setAttr(a + '.overrideEnabled',\
+    \ 0)"
+  inputs: []
+- name: Make Bakeable Script
+  task: make_bakeable_script
+  enabled: false
+  debug: false
+  group: EXPORT
+  mirror: false
+  code: "#===================\n# DESCRIPTION\n#===================\n\"\"\"Use to define\
+    \ FBX export data (meshes, skeleton etc.)\"\"\"\n\n#===================\n# USER\
+    \ INPUT\n#===================\n\"\"\" Define asset name, rig top node,  joints,\
+    \ meshes and or LOD node to export to FBX\"\"\"\nimport maya.cmds as cmds\n\n\
+    asset_name = rig['asset']\nrig_top_node = '{}_rig'.format(asset_name)\nfbx_geo\
+    \ = cmds.listRelatives('LOD_0', children=True)\nfbx_joints = cmds.listRelatives('skeleton',\
+    \ ad=True, type='joint')\n\n\n#======================\n# MAKE BAKEABLE SCRIPT\n\
+    #======================\n\"\"\"Scripted version of makeBakeables for FBX Exporting\"\
+    \"\"\nimport dragonfly.modules\nimport dragonfly.meta_types\n\n\ndef add_makeBakeableAttrs(top_node,\
+    \ asset_name, bake_geo, bake_skeleton, deleteExisting=True):\n    \"\"\"Adds makeBakeable\
+    \ attrs to rig top node\n\n    bake_geo = cmds.listRelatives('geo_lod0_grp', children=True)\n\
+    \    bake_skeleton = cmds.listRelatives('skel_grp', ad=True, type='joint')\n \
+    \   add_makeBakeableAttrs('CHR_ANW_DragonflyBlue', 'CHR_ANW_DragonflyBlue', bake_geo,\
+    \ bake_skeleton)\n    \"\"\"\n    if not cmds.attributeQuery('rig_data', node=top_node,\
+    \ exists=True):\n        print 'rig_data attr does not exist, adding'\n      \
+    \  # Add asset attr\n        dragonfly.modules.add_metatype(top_node, 'rig_info')\n\
+    \n        # Add rig data to top node\n        rig_data = {}\n        rig_data['asset']\
+    \ = asset_name\n        pyToAttr('{}.rig_data'.format(top_node), rig_data)\n\n\
+    \    # Add top node rig attr\n    if not cmds.attributeQuery(dragonfly.meta_types.MTYPE_RIG,\
+    \ node=top_node, exists=True):\n        dragonfly.modules.add_metatype(top_node,\
+    \ dragonfly.meta_types.MTYPE_RIG)\n\n    # DELETE BAKE ATTR IF SPECIFIED\n   \
+    \ if deleteExisting:\n        if cmds.attributeQuery('bakeNodes', node=top_node,\
+    \ exists=True):\n            cmds.deleteAttr('{}.bakeNodes'.format(top_node))\n\
+    \n    # MAKE BAKEABLE COMMAND\n    cmds.addAttr(top_node, ln='bakeNodes', at='message',\
+    \ multi=True)\n\n    # SKELETON NODES\n    bake_nodes = bake_skeleton\n\n    #\
+    \ GEOMETRY NODES\n    if bake_geo:\n        for geo in bake_geo:\n           \
+    \ bake_nodes.append(geo)\n\n    # ADD MAKE BAKEABLE ATTR\n    if bake_nodes:\n\
+    \        index=0\n        for node in bake_nodes:\n            dragonfly.modules.add_metatype(node,\
+    \ dragonfly.meta_types.MTYPE_BAKEABLE)\n            cmds.connectAttr('{}.message'.format(node),\
+    \ '{}.bakeNodes[{}]'.format(top_node, index))\n            index=index+1\n\n \
+    \   print \"Make Bakeable data added to {}\".format(top_node)\n    return True\n\
+    \n\ndef pyToAttr(objAttr, data, lock=True):\n    \"\"\"Write Python data to the\
+    \ given Maya obj.attr.\tThis data can later be read back via attrToPy().\n\n \
+    \   Args:\n        objAttr: A valid object.attribute name in the scene.\n    \
+    \                If the object exists, but the attribute doesn't, the attribute\
+    \ will be added.\n                    If the attribute already exists, it must\
+    \ be of type 'string', so the Python data can be written to it.\n        data:\
+    \   Some Python data, data that will be added to the attribute in question.\n\
+    \        lock:   Lock the attribute to prevent accidental editing\n\n    Examples:\n\
+    \        dictData = {'asset':'YellowButterfly'}# dictionary data\n        pyToAttr('YellowButterfly_rig.rig_data',\
+    \ dictData)# stores dictData dictionary to \"rig_data\" attr\n        attrToPy('YellowButterfly_rig.rig_data',\
+    \ 'asset')# retrieves dictionary's \"asset\" key from \"rig_data\" attr\n\n  \
+    \      listData = [1,2,3,\"this\", \"is\"]\n        pyToAttr('YellowButterfly_rig.list_data',\
+    \ listData)\n        my_list = attrToPy('YellowButterfly_rig.list_data', None)\n\
+    \    \"\"\"\n    obj, attr = objAttr.split('.')\n    if not cmds.objExists(objAttr):\n\
+    \        cmds.addAttr(obj, longName=attr, dataType='string')\n    if cmds.getAttr(objAttr,\
+    \ type=True) != 'string':\n        raise Exception(\"Object '%s' already has an\
+    \ attribute called '%s', but it isn't type 'string'\"%(obj,attr))\n\n    stringData\
+    \ = data\n    cmds.setAttr(objAttr, stringData, type='string')\n    if lock:\n\
+    \        cmds.setAttr(objAttr, lock=True)\n\n\n#======================\n# MAKE\
+    \ BAKEABLE RUN\n#======================\n\nadd_makeBakeableAttrs(rig_top_node,\
+    \ asset_name, fbx_geo, fbx_joints)\n\n"
+  inputs: []
+- name: Export Rig Script
+  task: export_rig_script
+  enabled: false
+  debug: false
+  group: EXPORT
+  mirror: false
+  code: "#===================\n# DESCRIPTION\n#===================\n\"\"\"Use to save\
+    \ rig with an option of exporting the rig topnode (export selection).  This can\
+    \ help clean a lot of extra nodes that end up in rig files\"\"\"\n\n#===================\n\
+    # USER INPUT\n#===================\n\"\"\" Edit rig's filename by changing the\
+    \ variable RIG_FILENAME below if necessary\"\"\"\n\nasset_name = rig['asset']\n\
+    file_type = 'mayaAscii' # 'mayaBinary'\nRIG_FILENAME = 'CH_{}_SK'.format(asset_name)\n\
+    \n\n#===================\n# EXPORT RIG SCRIPT\n#===================\n\nimport\
+    \ os\nimport ast\nimport maya.cmds as cmds\n\ndef attrToPy(objAttr, key):\n  \
+    \  \"\"\"Take previously stored data on a Maya attribute (put there via pyToAttr()\
+    \ ) and read it back to valid Python values.\n\n    Args:\n        objAttr:  \
+    \  A valid object.attribute name in the scene.    And of course, it must have\
+    \ already had valid Python data pickled to it.\n        key:        Optional key\
+    \ to specify\n\n    Examples:\n        See above pyToAttr\n    \"\"\"\n    if\
+    \ cmds.objExists(objAttr):\n        stringAttrData = str(cmds.getAttr(objAttr))\n\
+    \        data_dict = ast.literal_eval(stringAttrData)\n        if key:\n     \
+    \       return data_dict[key]\n        else:\n            return data_dict\n \
+    \   else:\n        return None\n\n\n#================\n# EXPORT RIG RUN\n#================\n\
+    \ntop_node = rig['rig']\ncmds.select(top_node)\n\nfile_ext = '.ma'\nif not 'mayaAscii'\
+    \ in file_type:\n    file_ext = '.mb'\n\nfile_path = os.path.dirname(os.path.abspath(cmds.file(q=True,\
+    \ sn=True)))\n\n\"\"\"Specify file naming convention here if necessary\"\"\"\n\
+    rig_file = '{}\\\\{}{}'.format(file_path, RIG_FILENAME, file_ext)\n\ncmds.file(rig_file,\
+    \ exportSelected=True, type=file_type, force=True)\n"
+  inputs: []
+- name: Export FBX LOD
+  task: export_fbx_lod
+  enabled: false
+  debug: false
+  group: EXPORT
+  mirror: false
+  filename: CH_<asset>_SK.fbx
+  lods:
+  - fbxVersion: 3
+    filePath: fbx/
+    geo: []
+    jointPruneList: []
+    lodName: LOD0
+    skeletonRoot: []
+    triangulateOutput: false
+    useGeoLodGroup: true
+    useLodSuffixInFilename: false
+- name: Open Exported Maya Rig
+  task: python
+  enabled: false
+  debug: false
+  group: EXPORT
+  mirror: false
+  code: '#===================
+
+    # DESCRIPTION
+
+    #===================
+
+    """Use to re-open a saved Maya rig """
+
+
+    #===================
+
+    # USER INPUT
+
+    #===================
+
+    """ Edit rig''s filename by changing the variable RIG_FILENAME below if necessary"""
+
+
+    asset_name = rig[''asset'']
+
+    file_ext = ''.ma''
+
+    RIG_FILENAME = ''CH_{}_SK''.format(asset_name)
+
+
+
+    #===================
+
+    # OPEN RIG SCRIPT RUN
+
+    #===================
+
+    import os
+
+    from maya import cmds
+
+
+    file_path = os.path.dirname(os.path.abspath(cmds.file(q=True, sn=True)))
+
+    rig_file = ''{}\\{}{}''.format(file_path, RIG_FILENAME, file_ext)
+
+    cmds.file(rig_file, open=True, force=True, prompt=False)'
+  inputs: []

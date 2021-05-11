@@ -1,0 +1,82 @@
+# https://stackoverflow.com/questions/3790454/in-yaml-how-do-i-break-a-string-over-multiple-lines
+title: Export Rig Script
+version: 0.0.1
+description: Run input Custom Python code
+color: (255, 100, 100)
+params:
+  code:
+    paramType: python
+    description: Code to be executed
+    defaultValue: |
+                  #===================
+                  # DESCRIPTION
+                  #===================
+                  """Use to save rig with an option of exporting the rig topnode (export selection).  This can help clean a lot of extra nodes that end up in rig files"""
+
+                  #===================
+                  # USER INPUT
+                  #===================
+                  """ Edit rig's filename by changing the variable RIG_FILENAME below if necessary"""
+
+                  asset_name = rig['asset']
+                  file_type = 'mayaAscii' # 'mayaBinary'
+                  RIG_FILENAME = 'CH_{}_SK'.format(asset_name)
+
+
+                  #===================
+                  # EXPORT RIG SCRIPT
+                  #===================
+
+                  import os
+                  import ast
+                  import maya.cmds as cmds
+
+                  def attrToPy(objAttr, key):
+                      """Take previously stored data on a Maya attribute (put there via pyToAttr() ) and read it back to valid Python values.
+
+                      Args:
+                          objAttr:    A valid object.attribute name in the scene.    And of course, it must have already had valid Python data pickled to it.
+                          key:        Optional key to specify
+
+                      Examples:
+                          See above pyToAttr
+                      """
+                      if cmds.objExists(objAttr):
+                          stringAttrData = str(cmds.getAttr(objAttr))
+                          data_dict = ast.literal_eval(stringAttrData)
+                          if key:
+                              return data_dict[key]
+                          else:
+                              return data_dict
+                      else:
+                          return None
+
+
+                  #================
+                  # EXPORT RIG RUN
+                  #================
+
+                  top_node = rig['rig']
+                  cmds.select(top_node)
+
+                  file_ext = '.ma'
+                  if not 'mayaAscii' in file_type:
+                      file_ext = '.mb'
+
+                  file_path = os.path.dirname(os.path.abspath(cmds.file(q=True, sn=True)))
+                  rig_file = '{}\\{}{}'.format(file_path, RIG_FILENAME, file_ext)
+                  cmds.file(rig_file, exportSelected=True, type=file_type, force=True)
+
+  inputs:
+    paramType: compound
+    defaultValue: []
+    description: Node references as variables
+    children:
+      - name: variable
+        paramType: string
+        defaultValue: null
+        description: Variable name to use in the code
+      - name: node
+        paramType: node
+        defaultValue: null
+        description: An existing node in the scene

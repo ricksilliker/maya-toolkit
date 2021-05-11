@@ -1,0 +1,30 @@
+title: Advanced Skeleton - Modify FK Control Orientation
+version: 0.0.3
+description: Re-orients FK control to specified orienation
+color: (255, 100, 100)
+params:
+  reorientFKControls:
+    paramType: compound
+    description: Specify FK control and offset to reorient
+    defaultValue: []
+    children:
+    - name: FKcontrol
+      paramType: string
+      description: FK control to be reoriented
+      defaultValue: null
+    - name: FKcontrolOffset
+      paramType: string
+      description: Offset node above FK control to reorient
+      defaultValue: null
+    - name: OrientValue
+      paramType: string
+      description: Offset node above FK control to reorient
+      defaultValue: 0, -90, -90
+    - name: insertNewOffsetTransform
+      paramType: bool
+      description: Inserts new orient node above FK offset node
+      defaultValue: true
+    - name: isNeckControl
+      paramType: bool
+      description: Specify this is a neck control to reorient
+      defaultValue: false

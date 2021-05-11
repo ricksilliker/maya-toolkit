@@ -1,0 +1,39 @@
+title: Add Display Layer
+version: 0.0.1
+description: Create a new display layer with the input attribute settings
+color: (255, 100, 100)
+params:
+  layers:
+    paramType: compound
+    description: Layers to be created
+    defaultValue: []
+    children:
+    - name: name
+      paramType: string
+      defaultValue: NewDisplayLayer
+      description: Name for the display layer
+    - name: objects
+      paramType: nodeList
+      defaultValue: []
+      description: Nodes to add to the display layer
+    - name: displayType
+      paramType: enum
+      defaultValue: 0
+      description: Manages the selectability and visual in the viewport for the layer
+      choices: [Normal, Template, Reference]
+    - name: shading
+      paramType: bool
+      defaultValue: true
+      description: If True, shaders are rendered in the viewport, else nodes in the layer are dislayed as wireframes
+    - name: texturing
+      paramType: bool
+      defaultValue: true
+      description: If True, textures are rendered in the viewport, else nodes in the layer are displayed in the default material
+    - name: playback
+      paramType: bool
+      defaultValue: true
+      description: If True, nodes are visible when timeline is playing, else nodes become hidden
+    - name: visible
+      paramType: bool
+      defaultValue: true
+      description: If True, nodes are visible at all times in the viewport, else nodes remain hidden

@@ -1,0 +1,31 @@
+title: Master Body Cog
+version: 0.0.1
+description: Create master, body and cog node hierarchy
+color: (255, 100, 100)
+requires: https://github.magicleap.com/tcoleman/color-maya.git
+params:
+
+  masterControl:
+    paramType: node
+    description: Object to use as master control
+    defaultValue: null
+
+  bodyControl:
+    paramType: node
+    description: Object to use as body control
+    defaultValue: null
+
+  cogControl:
+    paramType: node
+    description: Object to use as cog control
+    defaultValue: null
+
+  rootJoint:
+    paramType: node
+    description: Joint to use as root joint
+    defaultValue: null
+
+  addTrajectoryControl:
+    paramType: bool
+    description: Can be used to cancel out root motion of rig
+    defaultValue: true

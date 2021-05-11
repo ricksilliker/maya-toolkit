@@ -1,0 +1,25 @@
+title: Constraint
+version: 0.0.1
+description: Create a standard transform constraint for position, rotation, scale or a combination of all three
+color: (255, 100, 100)
+params:
+  leader:
+    paramType: node
+    description: Source node that the `followers` will follow
+    defaultValue: null
+
+  followers:
+    paramType: nodeList
+    description: Target nodes that will be constrained
+    defaultValue: null
+
+  maintainOffset:
+    paramType: bool
+    description: Whether or not to snap the followers to the leader, this is a setting of the constraint node
+    defaultValue: false
+
+  constraintType:
+    paramType: enum
+    description: Type of constraint to apply between the leader and followers
+    defaultValue: 3
+    choices: [Position, Rotation, Scale, Parent, Parent/Scale]

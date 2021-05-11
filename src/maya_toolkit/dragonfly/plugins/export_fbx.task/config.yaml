@@ -1,0 +1,15 @@
+title: Export FBX
+version: 0.0.1
+description: Export the deformation skeleton and meshes to an FBX file
+color: (255, 100, 100)
+params:
+  FBXVersion:
+    paramType: enum
+    description: FBX version to save as
+    defaultValue: 0
+    choices: ["2016", "2017", "2018"]
+
+  outputPath:
+    paramType: file_path
+    description: Location on disk to save the FBX
+    defaultValue: null

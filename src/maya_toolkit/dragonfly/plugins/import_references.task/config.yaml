@@ -1,0 +1,9 @@
+title: Import File References
+version: 0.0.1
+description: Import All files references in the current scene
+color: (255, 100, 100)
+params:
+  excludeNodes:
+    paramType: nodeList
+    description: A list of node references to skip from importing
+    defaultValue: []

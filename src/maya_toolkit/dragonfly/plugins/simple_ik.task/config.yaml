@@ -1,0 +1,24 @@
+title: Simple IK
+version: 0.0.1
+description: Create simple IK rig 
+color: (255, 100, 100)
+params:
+  skeleton:
+    paramType: nodeList
+    description: Joints used to create IK Rig
+    defaultValue: null
+
+  rootControl:
+    paramType: node
+    description: Top control at the root of the setup, it translates the root/first joint
+    defaultValue: null
+
+  poleControl:
+    paramType: node
+    description: Mid control that twists the joints from the elbow
+    defaultValue: null
+
+  goalControl:
+    paramType: node
+    description: End control that moves the chain from the root, bends at the mid joint, rotates the end joint, and holds the other attributes for this setup
+    defaultValue: null

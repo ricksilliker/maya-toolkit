@@ -1,0 +1,2 @@
+class CharacterToolsError(Exception):
+    pass

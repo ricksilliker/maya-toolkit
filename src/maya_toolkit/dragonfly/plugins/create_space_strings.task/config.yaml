@@ -1,0 +1,22 @@
+title: Create Spaces Strings
+version: 0.0.2
+description: Make the necessary connections to represent the target object as a valid space object
+color: (255, 100, 100)
+params:
+  spaces:
+    paramType: compound
+    description: Name to give the space, this is used for the enum attribute when applying spaces to nodes
+    defaultValue: [{spaceName: master, target: null, delegates: []}, {spaceName: body, target: null, delegates: []}]
+    children:
+    - name: spaceName
+      paramType: string
+      defaultValue: null
+      description: Name to give space
+    - name: target
+      paramType: string
+      description: Object that becomes the space
+      defaultValue: null
+    - name: delegates
+      paramType: nodeList
+      description: Parent nodes that could also be considered a valid object for this space object
+      defaultValue: []

@@ -1,0 +1,64 @@
+# https://stackoverflow.com/questions/3790454/in-yaml-how-do-i-break-a-string-over-multiple-lines
+title: Export FBX Script
+version: 0.0.1
+description: Export to fbx file through FBX script
+color: (255, 100, 100)
+params:
+  code:
+    paramType: python
+    description: Code to be executed
+    defaultValue: |
+                  #===================
+                  # DESCRIPTION
+                  #===================
+                  """Use to export FBX data from rig (meshes, skeleton etc.)"""
+
+                  #===================
+                  # VARIABLES
+                  #===================
+                  asset_name = rig['asset']
+                  rig_top_node = '{}_rig'.format(asset_name)
+
+                  #===================
+                  # USER INPUT
+                  #===================
+                  """ Define asset name, rig top node, joints, meshes and or LOD node to export to FBX"""
+                  import maya.cmds as cmds
+
+                  fbx_export_file_path = 'fbx/CH_{}_SK.fbx'.format(asset_name) # Relative path and filename for FBX file
+                  mesh_list = cmds.listRelatives('LOD_0', children=True) # list of meshes to export
+                  skeleton_top_joint = cmds.listRelatives('skeleton', type='joint')[0] # root joint of skeleton to export
+                  fbx_version='2018'
+
+                  #======================
+                  # EXPORT FBX SCRIPT
+                  #======================
+                  import logging
+                  import maya.cmds as cmds
+                  import dragonfly.modules
+
+                  LOG = logging.getLogger(__name__)
+
+                  dragonfly.modules.export_lod_fbx(
+                                                  rig_top_node,
+                                                  (dragonfly.modules.resolve_file_path(fbx_export_file_path)),
+                                                  mesh_list,
+                                                  skeleton_top_joint,
+                                                  fbx_version=fbx_version,
+                                                  triangulate=False
+                                                )
+
+                  LOG.info("Fbx exported rig to: {}".format(dragonfly.modules.resolve_file_path(fbx_export_file_path)))
+  inputs:
+    paramType: compound
+    defaultValue: []
+    description: Node references as variables
+    children:
+      - name: variable
+        paramType: string
+        defaultValue: null
+        description: Variable name to use in the code
+      - name: node
+        paramType: node
+        defaultValue: null
+        description: An existing node in the scene

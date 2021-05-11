@@ -1,0 +1,52 @@
+title: Export FBX LOD
+version: 0.0.1
+description: Export the deformation skeleton and meshes to an FBX lod file
+color: (255, 100, 100)
+params:
+  filename:
+    paramType: string
+    defaultValue: CH_<asset>_SK.fbx
+    description: File naming convention for fbx file
+  lods:
+    paramType: compound
+    description: Fbx export groups
+    defaultValue: []
+    children:
+    - name: lodName
+      paramType: string
+      defaultValue: LOD0
+      description: LOD suffix of Fbx file
+    - name: filePath
+      paramType: file_path
+      defaultValue: 'fbx/'
+      description: Location on disk to save the FBX
+    - name: fbxVersion
+      paramType: enum
+      description: FBX version to save as
+      defaultValue: 3
+      choices: ["2015", "2016", "2017", "2018"]
+    - name: useGeoLodGroup
+      paramType: bool
+      description: Will export LOD group
+      defaultValue: false
+    - name: useLodSuffixInFilename
+      paramType: bool
+      description: Will add LOD name as suffix to FBX filename
+      defaultValue: false
+    - name: triangulateOutput
+      paramType: bool
+      description: Triangulate geometry at fbx export
+      defaultValue: false
+    - name: geo
+      paramType: nodeList
+      defaultValue: []
+      description: Geo to export for this FBX lod
+    - name: skeletonRoot
+      paramType: nodeList
+      defaultValue: []
+      description: Root joint to export for this FBX lod
+    - name: jointPruneList
+      paramType: nodeList
+      defaultValue: []
+      description: Joints to delete for this FBX lod
+

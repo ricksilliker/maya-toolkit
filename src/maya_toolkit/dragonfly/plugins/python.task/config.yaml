@@ -1,0 +1,22 @@
+title: Python
+version: 0.0.1
+description: Run input Python code
+color: (255, 100, 100)
+params:
+  code:
+    paramType: python
+    description: Code to be executed
+    defaultValue: import maya.cmds as cmds
+  inputs:
+    paramType: compound
+    defaultValue: []
+    description: Node references as variables
+    children:
+      - name: variable
+        paramType: string
+        defaultValue: null
+        description: Variable name to use in the code
+      - name: node
+        paramType: node
+        defaultValue: null
+        description: An existing node in the scene

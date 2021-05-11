@@ -1,0 +1,17 @@
+title: Rig Rename
+version: 0.0.2
+description: Used to rename rig nodes in various ways.
+color: (255, 100, 100)
+params:
+  advancedSkeletonToMLRigRename:
+    paramType: bool
+    description: Renames Advanced Skeleton rig to ML naming convention
+    defaultValue: false
+
+
+
+
+
+
+
+

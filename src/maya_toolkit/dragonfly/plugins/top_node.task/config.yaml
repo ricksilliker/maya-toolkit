@@ -1,0 +1,9 @@
+title: Top Node
+version: 0.0.1
+description: Create rig hierarchy top node
+color: (255, 100, 100)
+params:
+  rigName:
+    paramType: string
+    description: Rig top most node, all of the rig DAG lives underneath this node
+    defaultValue: null

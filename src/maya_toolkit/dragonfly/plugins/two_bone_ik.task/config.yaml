@@ -1,0 +1,40 @@
+title: Two Bone IK
+version: 0.0.1
+description: Create simple IK rig with optional stretchy, great for biped arms and legs
+color: (255, 100, 100)
+params:
+  skeleton:
+    paramType: nodeList
+    description: Joints used to deform the character
+    defaultValue: null
+
+  rootControl:
+    paramType: node
+    description: Top control at the root of the setup, it translates the root/first joint
+    defaultValue: null
+
+  poleControl:
+    paramType: node
+    description: Mid control that twists the joints from the elbow
+    defaultValue: null
+
+  goalControl:
+    paramType: node
+    description: End control that moves the chain from the root, bends at the mid joint, rotates the end joint, and holds the other attributes for this setup
+    defaultValue: null
+
+  addStretch:
+    paramType: bool
+    description: Add a node network that creates squash and stretch along the joint chain
+    defaultValue: true
+
+  axisDownBone:
+    paramType: enum
+    description: Select which axis points down the chain, this is used to solve the stretch hook up
+    defaultValue: 1
+    choices: [X, Y, Z]
+
+  isNegative:
+    paramType: bool
+    description: Check if the axis down the bone is pointing up the chain instead of down
+    defaultValue: false

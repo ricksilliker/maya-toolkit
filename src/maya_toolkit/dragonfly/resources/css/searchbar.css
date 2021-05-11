@@ -1,0 +1,28 @@
+#SearchButton {
+    background: #444;
+    width: 30px;
+    max-height: 30px;
+    max-width: 30px;
+    qproperty-iconSize: 30px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+#SearchButton:hover {
+    background: #666;
+}
+
+#SearchButton:pressed {
+    background: #333;
+}
+
+#SearchField {
+    max-height: 30px;
+    font-size: 18pt;
+    background: #444;
+    font-family: "OpenSans-Light", sans-serif;
+    color: #DDD;
+    border: None;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}

@@ -1,0 +1,42 @@
+title: Import Animation
+version: 0.0.1
+description: Import animation data from external file
+color: (255, 100, 100)
+params:
+  anim file options:
+    paramType: compound
+    description: Anim Import Options
+    defaultValue: []
+    children:
+    - name: filePath
+      paramType: file_path
+      defaultValue: data/
+      description: Animation file path location
+    - name: fileName
+      paramType: string
+      defaultValue: <anim file .atom>
+      description: ATOM animation file name
+    - name: importMethod
+      paramType: enum
+      description: Method to import anim data onto objects
+      defaultValue: 1
+      choices: ["selected", "hierarchy"]
+    - name: matchMethod
+      paramType: enum
+      description: Method to match anim data onto objects
+      defaultValue: 1
+      choices: ["hierarchy", "string"]
+    - name: search
+      paramType: string
+      defaultValue:
+      description: String to search for
+    - name: replace
+      paramType: string
+      defaultValue:
+      description: String to replace with
+    - name: timeRange
+      paramType: enum
+      description: Time range to import anim data to
+      defaultValue: 2
+      choices: ["Start End", "Time Slider", 'From File']
+

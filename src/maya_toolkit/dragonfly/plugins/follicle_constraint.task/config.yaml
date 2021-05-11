@@ -1,0 +1,19 @@
+title: Follicle Constraint
+version: 0.0.1
+description: Constrain a node positionally and rotationally to a follicle
+color: (255, 100, 100)
+params:
+  geometry:
+    paramType: node
+    description: Mesh or nurbs surface transform or shape node
+    defaultValue: null
+
+  target:
+    paramType: node
+    description: Target nodes that will be constrained
+    defaultValue: null
+
+  maintainOffset:
+    paramType: bool
+    description: Whether or not to snap the target to the follicle
+    defaultValue: false

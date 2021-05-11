@@ -1,0 +1,47 @@
+title: IK Spline
+version: 0.0.1
+description: IK Spline rig setup with optional stretch
+color: (255, 100, 100)
+params:
+  baseName:
+    paramType: string
+    description: Name description for this module
+    defaultValue: cn_tent
+
+  stretchy:
+    paramType: bool
+    description: Add translation based stretch to the setup
+    defaultValue: true
+
+  volume:
+    paramType: bool
+    description: Add scale based volume to the setup
+    defaultValue: true
+
+  curve:
+    paramType: node
+    description: Spline to use to map to ikHandle
+
+  rootJoint:
+    paramType: node
+    description: First joint in the chain
+
+  endJoint:
+    paramType: node
+    description: Last joint in the chain
+
+  controls:
+    paramType: nodeList
+    description: Control objects for animation
+
+  axisDownBone:
+    paramType: enum
+    description: Select which axis points down the chain, this is used to solve the stretch hook up
+    defaultValue: 1
+    choices: [X, Y, Z]
+
+  upAxis:
+    paramType: enum
+    description: Axis that represents the relative up direction of the joint chain
+    defaultValue: 2
+    choices: [X, Y, Z]

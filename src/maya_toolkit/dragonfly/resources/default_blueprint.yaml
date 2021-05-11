@@ -1,0 +1,88 @@
+name: CharacterName
+tasks:
+- name: Import All Refs
+  task: import_references
+  enabled: true
+  debug: false
+  group: Main
+  mirror: false
+  excludeNodes: []
+
+- name: Remove All Namespaces
+  task: remove_namespaces
+  enabled: true
+  debug: false
+  group: Main
+  mirror: false
+  excludeList: null
+
+- name: Create Top Node
+  task: top_node
+  enabled: true
+  debug: false
+  group: Main
+  mirror: false
+  rigName: character
+
+- name: Create Core Hierarchy
+  task: create_category
+  enabled: true
+  debug: false
+  group: Main
+  mirror: false
+  categories:
+  - name: meshes
+    nodes: []
+  - name: skeleton
+    nodes: []
+  - name: ctls
+    nodes: []
+  - name: rig
+    nodes: []
+  - name: noXform
+    nodes: []
+  - name: spaces
+    nodes: []
+  - name: sim
+    nodes: []
+
+- name: Master Body Cog
+  task: create_masterBodyCog
+  enabled: true
+  debug: false
+  group: Main
+  mirror: false
+  masterControl: null
+  bodyControl: null
+  cogControl: null
+  rootJoint: null
+  addTrajectoryControl: true
+
+- name: Tag Controllers
+  task: tag_as_control
+  enabled: true
+  debug: false
+  group: Main
+  mirror: false
+  nodes: []
+  createOffset: true
+  hiddenAttrs: rax, ray, raz, v
+  lockedAttrs: rax, ray, raz, v
+  freezeScale: false
+
+- name: Rig Cleanup
+  task: rig_cleanup
+  enabled: true
+  debug: false
+  group: Main
+  mirror: false
+  parentConstraintsUnderNoXform: true
+
+- name: Export Rig FBX
+  task: export_fbx
+  enabled: true
+  debug: false
+  group: Main
+  mirror: false
+  FBXVersion: 0
+  outputPath: null

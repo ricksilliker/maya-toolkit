@@ -1,0 +1,18 @@
+title: Create LOD Group
+version: 0.0.1
+description: Creates main LOD group and subgroups that will be exported via FBX
+color: (255, 100, 100)
+params:
+  lods:
+    paramType: compound
+    description: Lod groups
+    defaultValue: []
+    children:
+    - name: lodName
+      paramType: string
+      defaultValue: LOD0
+      description: LOD for specified mesh
+    - name: geo
+      paramType: nodeList
+      defaultValue: []
+      description: Geo to export for this LOD

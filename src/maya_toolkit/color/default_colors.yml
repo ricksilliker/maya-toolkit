@@ -1,0 +1,42 @@
+NONE:
+    - 5
+    - 0, 0, 0
+YELLOW:
+    -
+    - 255, 255, 0
+BLUE:
+    - 6
+    - 0, 0, 255
+RED:
+    - 13
+    - 255, 0, 0
+GREEN:
+    - 14
+    - 0, 255, 0
+CYAN:
+    - 18
+    - 0, 255, 255
+WHITE:
+    - 16
+    - 255, 255, 255
+BLACK:
+    - 1
+    - 0, 0, 0
+PINK:
+    - 20
+    - 255, 0, 115
+SIDE_COLOR:
+    None:
+        NONE
+    LEFT:
+        BLUE
+    RIGHT:
+        RED
+    CENTER:
+        YELLOW
+    MIDDLE:
+        YELLOW
+    FRONT:
+        YELLOW
+    BACK:
+        YELLOW

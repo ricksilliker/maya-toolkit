@@ -1,0 +1,49 @@
+title: Advanced Skeleton - Modify Rig
+version: 0.0.3
+description: Various functions that modify default Advanced Skeleton animation rig
+color: (255, 100, 100)
+params:
+  parentUnderMasterBodyCog:
+    paramType: bool
+    description: Parents Advanced Skeleton rig under Master, Body, Cog controls if they exist
+    defaultValue: true
+  controlShapesColors:
+    paramType: bool
+    description: Modifies some of the default control shapes and colors
+    defaultValue: true
+  fkIkBlendRange:
+    paramType: bool
+    description: Sets fkik range from 0-10 to 0-1
+    defaultValue: true
+  rotationOrdersXZY:
+    paramType: bool
+    description: Sets arm control rotation orders to xzy
+    defaultValue: true
+  addPropSpaceArmIK:
+    paramType: bool
+    description: Adds a set of world space IK controls
+    defaultValue: true
+  addFkGimbalControls:
+    paramType: bool
+    description: Adds gimbal control to existing fk controls
+    defaultValue: true
+  fixFingerSpread:
+    paramType: bool
+    description: Fixes finger curl and spread ordering
+    defaultValue: true
+  disableVolume:
+    paramType: bool
+    description: Zeroes out, and locks/hides attribute
+    defaultValue: true
+  disableRootFK:
+    paramType: bool
+    description: Hides redundant root fk control
+    defaultValue: true
+  hideFollowAttrs:
+    paramType: bool
+    description: Hides follow attrs
+    defaultValue: true
+  hideGlobalAttrs:
+    paramType: bool
+    description: Hides follow attrs
+    defaultValue: true

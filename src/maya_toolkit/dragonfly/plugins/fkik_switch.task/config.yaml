@@ -1,0 +1,64 @@
+title: Fk/Ik Switcher
+version: 0.0.1
+description: Create Simple IK and FK Rig and connects them via Switcher
+color: (255, 100, 100)
+params:
+  ikSkeleton:
+    paramType: nodeList
+    description: Joints used to create IK Rig
+    defaultValue: []
+
+  ikRootControl:
+    paramType: node
+    description: Top control at the root of the setup, it translates the root/first joint
+    defaultValue: null
+
+  ikPoleControl:
+    paramType: node
+    description: Mid control that twists the joints from the elbow
+    defaultValue: null
+
+  addIkPoleControlFollow:
+    paramType: bool
+    description: Add pole vector follow ik box attr
+    defaultValue: false
+
+  ikGoalControl:
+    paramType: node
+    description: End control that moves the chain from the root, bends at the mid joint, rotates the end joint, and holds the other attributes for this setup
+    defaultValue: null
+
+  fkSkeleton:
+    paramType: nodeList
+    description: Joints used to deform the character
+    defaultValue: []
+
+  fkControls:
+    paramType: nodeList
+    description: Control objects used to move the skeleton and/or rig
+    defaultValue: []
+
+  fkNumberOfSegments:
+    paramType: int
+    description: Number of joints/controls to generate when `setUp` is run on a new FK Chain instance
+    defaultValue: 3
+
+  fkUseConstraints:
+    paramType: bool
+    description: Connect control objects to deformation joints using constraints, if disabled a matrix nodal network is created
+    defaultValue: true
+
+  fkDisableScaling:
+    paramType: bool
+    description: Lock and hide scale attributes on all control objects
+    defaultValue: false
+
+  addFkIkSwitch:
+    paramType: bool
+    description: Will create Fk Ik Switch Capability
+    defaultValue: true
+
+  fkIkSwitch:
+    paramType: node
+    description: Control to be used as FK/IK Switcher
+    defaultValue: null

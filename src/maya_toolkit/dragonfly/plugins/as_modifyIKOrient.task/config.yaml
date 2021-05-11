@@ -1,0 +1,22 @@
+title: Advanced Skeleton - Modify IK Control Orientation
+version: 0.0.3
+description: Re-orients and IK control the specified amount
+color: (255, 100, 100)
+params:
+  IKControls:
+    paramType: compound
+    description: Specify IK controlsflip transfrom and rotation axis
+    defaultValue: []
+    children:
+    - name: IKControl
+      paramType: string
+      description: IK control to flip axis on
+      defaultValue: null
+    - name: IKOffsetNode
+      paramType: string
+      description: Transform to add the flip transform above
+      defaultValue: null
+    - name: AxisRotation
+      paramType: string
+      description: The axis and amount to reorient
+      defaultValue: 180,0,0
